@@ -24,7 +24,7 @@ namespace PiSenseLedController
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            // Azure Configuration? 
+            // Load the azure configuration
             AzureConfigDto configDto = new AzureConfigDto();
             Configuration.Bind("AzureConfiguration",configDto);
             services.AddSingleton(configDto);

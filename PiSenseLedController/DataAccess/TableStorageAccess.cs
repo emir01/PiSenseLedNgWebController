@@ -37,8 +37,6 @@ namespace PiSenseLedController.DataAccess
             return piLedResultModel;
         }
 
-
-
         EntityResolver<PiLedModel> resolver = (pk, rk, ts, props, etag) =>
         {
             var piLedModel = new PiLedModel()
