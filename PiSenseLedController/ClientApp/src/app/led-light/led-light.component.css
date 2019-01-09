@@ -1,0 +1,18 @@
+:host {
+  height: 40px;
+  width: 40px;
+  display: block;
+  float: left;
+  margin:4px;
+  border:2px solid #FFF;
+  border-radius:5px;
+}
+
+  :host:hover{
+    cursor:pointer;
+    border-color:#000;
+  }
+
+  :host.last-led {
+    clear: left;
+  }

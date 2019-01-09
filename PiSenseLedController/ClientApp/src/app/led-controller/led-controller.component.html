@@ -1,5 +1,14 @@
-<h1> Led Controller </h1>
+<h1> Led Board </h1>
 
+<div class="led-board-wrapper">
+  <div class="led-board">
+    <app-led-light *ngFor="let rgb of ledModel.ledMatrix; let i = index"
+                   [index]="i"
+                   [red]="rgb[0]"
+                   [green]="rgb[1]"
+                   [blue]="rgb[2]">
+    </app-led-light>
 
-<pre>{{ledModel|json}}</pre>
-
+    <div class="clear-fix"></div>
+  </div>
+</div>

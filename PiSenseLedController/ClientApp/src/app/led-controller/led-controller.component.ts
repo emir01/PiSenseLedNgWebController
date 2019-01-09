@@ -7,9 +7,10 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./led-controller.component.css']
 })
 export class LedControllerComponent implements OnInit {
-  ledModel: any;
+  ledModel: any = new Array<Array<number>>();
 
   constructor(http: HttpClient, @Inject("BASE_URL") baseUrl: string) {
+
     http.get(baseUrl + "api/Led/Model")
       .subscribe(result => {
         this.ledModel = result;
