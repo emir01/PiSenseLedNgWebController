@@ -16,3 +16,7 @@
   :host.last-led {
     clear: left;
   }
+
+  :host.selected{
+    border-color:#F00;
+  }

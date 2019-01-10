@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-led-light',
@@ -22,14 +22,29 @@ export class LedLightComponent implements OnInit {
   @Input()
   index: number;
 
+  selected: boolean;
+
   @HostBinding('attr.class') hostClass = '';
   @HostBinding('style.background-color') hostBackgroundColor = '';
+
+  @HostListener('click', ['$event'])
+  onClick() {
+    this.selected = !this.selected;
+
+    if (this.selected) {
+      this.hostClass += " selected"
+    }
+    else {
+      this.hostClass = this.hostClass.replace(" selected", "");
+    }
+  }
 
   constructor() {
     // defaults
     this.red = 255;
     this.blue = 255;
     this.green = 255;
+    this.selected = false;
   }
 
   ngOnInit() {
