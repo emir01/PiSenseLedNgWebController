@@ -5,7 +5,6 @@ import { Component, OnInit, Input, HostBinding, HostListener } from '@angular/co
   templateUrl: './led-light.component.html',
   styleUrls: ['./led-light.component.css']
 })
-
 export class LedLightComponent implements OnInit {
   // Inputs
   @Input()
