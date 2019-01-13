@@ -4,8 +4,7 @@
 
 <div class="led-board-wrapper">
   <div class="led-board">
-    <app-led-light *ngFor="let led of ledModel.leds; let i = index"
-                   [index]="i"
+    <app-led-light *ngFor="let led of ledModel.leds;"
                    [led]="led">
     </app-led-light>
     <div class="clear-fix"></div>

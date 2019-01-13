@@ -9,9 +9,8 @@ export class LedBoard {
     if (config) {
       this.size = config.size;
 
-      (config.ledsArray || []).forEach((val: number[]) => {
-        this.leds.push(
-          new Led({ red: val[0], green: val[1], blue: val[2] }));
+      (config.ledsArray || []).forEach((val: number[], index: number) => {
+        this.leds.push(new Led(index, { red: val[0], green: val[1], blue: val[2] }));
       });
     }
     else {

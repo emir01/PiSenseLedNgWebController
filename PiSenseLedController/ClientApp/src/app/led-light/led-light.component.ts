@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, HostBinding, HostListener, OnChanges, SimpleChanges } from '@angular/core';
 import { Led } from '../models/Led';
+import { LedBoardService } from '../services/led-board.service';
 
 @Component({
   selector: 'app-led-light',
@@ -11,21 +12,16 @@ export class LedLightComponent implements OnInit {
   @Input()
   led: Led = new Led();
 
-  @Input()
-  index: number;
-
   @HostBinding('attr.class') hostClass = '';
 
   onClick($event) {
-    this.led.selected = !this.led.selected;
+    this.ledService.ledClicked(this.led, $event.shiftKey, $event.ctrlKey);
   }
 
-  constructor() {
-    // defaults
-  }
+  constructor(private ledService: LedBoardService) {}
 
   ngOnInit() {
-    if ((this.index + 1) % 8 == 1) {
+    if ((this.led.index + 1) % 8 == 1) {
       this.hostClass = 'last-led'
     }
   }
@@ -38,5 +34,4 @@ export class LedLightComponent implements OnInit {
   rgbToHex(r, g, b) {
     return "#" + this.componentToHex(r) + this.componentToHex(g) + this.componentToHex(b);
   }
-
 }
