@@ -8,8 +8,8 @@ import { LedBoardService } from '../services/led-board.service';
   styleUrls: ['./led-board.component.css']
 })
 export class LedBoardComponent implements OnInit {
-    ledModel: LedBoard = new LedBoard();
-
+   ledModel: LedBoard = new LedBoard();
+  
   constructor(private service: LedBoardService) {
     service.getBoardModel().subscribe(ledBoard => this.ledModel = ledBoard);
   }
@@ -17,7 +17,9 @@ export class LedBoardComponent implements OnInit {
   ngOnInit() {
   }
 
-  refresh() {
-    this.service.getBoardModel().subscribe(ledBoard => this.ledModel = ledBoard);
+  process() {
+    this.service.process();
+    console.log("Board Model from component: ", this.ledModel);
+    //this.service.getBoardModel().subscribe(ledBoard => this.ledModel = ledBoard);
   }
 }

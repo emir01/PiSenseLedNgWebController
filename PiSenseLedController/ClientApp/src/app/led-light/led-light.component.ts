@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, HostListener, OnChanges, SimpleChanges } from '@angular/core';
 import { Led } from '../models/Led';
 
 @Component({
@@ -19,7 +19,9 @@ export class LedLightComponent implements OnInit {
 
   @HostListener('click', ['$event'])
 
-  onClick() {
+  onClick($event) {
+    console.log($event);
+
     this.led.selected = !this.led.selected;
 
     if (this.led.selected) {

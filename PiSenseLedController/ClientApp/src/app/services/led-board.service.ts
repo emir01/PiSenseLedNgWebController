@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/do'
+
 import 'rxjs/add/observable/of';
 
 import { Observable } from 'rxjs/Observable';
@@ -26,5 +27,11 @@ export class LedBoardService {
     return this.http.get(this.baseUrl + "api/Led/Model")
       .map((data: any) => new LedBoard({ ledsArray: data.ledMatrix, size: data.matrixSize }))
       .do(board => { this.boardModel = board; })
+  }
+
+
+  process() {
+    this.boardModel.leds[0].selected = true;
+    console.log("Board Model From Service: ", this.boardModel);
   }
 }
