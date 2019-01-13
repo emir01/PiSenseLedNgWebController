@@ -16,4 +16,8 @@ export class LedBoardComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  refresh() {
+    this.service.getBoardModel().subscribe(ledBoard => this.ledModel = ledBoard);
+  }
 }
