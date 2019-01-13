@@ -15,21 +15,9 @@ export class LedLightComponent implements OnInit {
   index: number;
 
   @HostBinding('attr.class') hostClass = '';
-  @HostBinding('style.background-color') hostBackgroundColor = '';
-
-  @HostListener('click', ['$event'])
 
   onClick($event) {
-    console.log($event);
-
     this.led.selected = !this.led.selected;
-
-    if (this.led.selected) {
-      this.hostClass += " selected"
-    }
-    else {
-      this.hostClass = this.hostClass.replace(" selected", "");
-    }
   }
 
   constructor() {
@@ -37,8 +25,6 @@ export class LedLightComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hostBackgroundColor = this.rgbToHex(this.led.red, this.led.green, this.led.blue)
-
     if ((this.index + 1) % 8 == 1) {
       this.hostClass = 'last-led'
     }

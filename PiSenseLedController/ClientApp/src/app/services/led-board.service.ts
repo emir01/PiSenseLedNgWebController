@@ -29,7 +29,6 @@ export class LedBoardService {
       .do(board => { this.boardModel = board; })
   }
 
-
   process() {
     this.boardModel.leds[0].selected = true;
     console.log("Board Model From Service: ", this.boardModel);
