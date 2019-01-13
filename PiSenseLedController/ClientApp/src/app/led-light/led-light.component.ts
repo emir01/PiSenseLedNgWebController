@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, HostBinding, HostListener } from '@angular/core';
+import { Led } from '../models/Led';
 
 @Component({
   selector: 'app-led-light',
@@ -8,29 +9,20 @@ import { Component, OnInit, Input, HostBinding, HostListener } from '@angular/co
 export class LedLightComponent implements OnInit {
   // Inputs
   @Input()
-  red: number;
-
-  // Inputs
-  @Input()
-  green: number;
-
-  // Inputs
-  @Input()
-  blue: number;
+  led: Led = new Led();
 
   @Input()
   index: number;
-
-  selected: boolean;
 
   @HostBinding('attr.class') hostClass = '';
   @HostBinding('style.background-color') hostBackgroundColor = '';
 
   @HostListener('click', ['$event'])
-  onClick() {
-    this.selected = !this.selected;
 
-    if (this.selected) {
+  onClick() {
+    this.led.selected = !this.led.selected;
+
+    if (this.led.selected) {
       this.hostClass += " selected"
     }
     else {
@@ -40,14 +32,10 @@ export class LedLightComponent implements OnInit {
 
   constructor() {
     // defaults
-    this.red = 255;
-    this.blue = 255;
-    this.green = 255;
-    this.selected = false;
   }
 
   ngOnInit() {
-    this.hostBackgroundColor = this.rgbToHex(this.red, this.green, this.blue)
+    this.hostBackgroundColor = this.rgbToHex(this.led.red, this.led.green, this.led.blue)
 
     if ((this.index + 1) % 8 == 1) {
       this.hostClass = 'last-led'

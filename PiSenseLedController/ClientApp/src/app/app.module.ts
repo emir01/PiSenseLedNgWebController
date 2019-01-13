@@ -3,17 +3,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { LedControllerComponent } from './led-controller/led-controller.component';
+import { LedBoardComponent } from './led-board/led-board.component';
 import { LedLightComponent } from './led-light/led-light.component';
+import { LedBoardService } from './services/led-board.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    LedControllerComponent,
+    LedBoardComponent,
     LedLightComponent,
   ],
   imports: [
@@ -21,10 +21,10 @@ import { LedLightComponent } from './led-light/led-light.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: LedControllerComponent, pathMatch: 'full' },
+      { path: '', component: LedBoardComponent, pathMatch: 'full' },
     ])
   ],
-  providers: [],
+  providers: [LedBoardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

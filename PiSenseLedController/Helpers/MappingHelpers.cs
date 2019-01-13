@@ -26,7 +26,8 @@ namespace PiSenseLedController.Helpers
         {
             return new LedViewModel()
             {
-                LedMatrix = StringMatrixAsList(model.Matrix)
+                LedMatrix = StringMatrixAsList(model.Matrix),
+                MatrixSize = model.Size
             };
         }
     }

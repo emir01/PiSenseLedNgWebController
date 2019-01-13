@@ -4,10 +4,13 @@ export class Led {
   blue: number;
   selected: boolean;
 
-  constructor(red, green, blue) {
-    this.red = red;
-    this.green = green;
-    this.blue = blue;
+  constructor(colors?: { red: number, green: number, blue: number }) {
     this.selected = false;
+
+    if (colors) {
+      this.red = colors.red;
+      this.green = colors.green;
+      this.blue = colors.blue;
+    }
   }
 }
