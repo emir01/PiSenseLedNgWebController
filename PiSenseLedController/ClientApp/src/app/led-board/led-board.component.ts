@@ -9,17 +9,15 @@ import { LedBoardService } from '../services/led-board.service';
 })
 export class LedBoardComponent implements OnInit {
    ledModel: LedBoard = new LedBoard();
-  
-  constructor(private service: LedBoardService) {
+
+    constructor(private service: LedBoardService) {
     service.getBoardModel().subscribe(ledBoard => this.ledModel = ledBoard);
   }
 
   ngOnInit() {
   }
 
-  process() {
-    this.service.process();
-    console.log("Board Model from component: ", this.ledModel);
-    //this.service.getBoardModel().subscribe(ledBoard => this.ledModel = ledBoard);
+  colorChanged(newColor) {
+    console.log("Color Changed from Color picker component: ", newColor);
   }
 }

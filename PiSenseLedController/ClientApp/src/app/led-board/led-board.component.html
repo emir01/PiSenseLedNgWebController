@@ -1,15 +1,15 @@
-<h1> Led Board </h1>
+<div class="border-bottom pb-1 mb-3 text-center">
+  <h1> Led Board </h1>
+</div>
 
-<button (click)="process()"> Process </button>
-
-<app-color-picker (colorChanged)="colorSelected($event)"></app-color-picker>
+<app-color-picker (colorChanged)="colorChanged($event)"></app-color-picker>
 
 <div class="led-board-wrapper">
   <div class="led-board">
     <app-led-light *ngFor="let led of ledModel.leds;"
                    [led]="led">
     </app-led-light>
-    <div class="clear-fix"></div>
+    <div class="clearfix"></div>
   </div>
 </div>
 
