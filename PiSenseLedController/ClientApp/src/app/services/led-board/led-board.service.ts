@@ -1,5 +1,4 @@
 import { Injectable, Inject } from '@angular/core';
-import { LedBoard } from '../models/LedBoard';
 import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/add/operator/map'
@@ -8,8 +7,9 @@ import 'rxjs/add/operator/do'
 import 'rxjs/add/observable/of';
 
 import { Observable } from 'rxjs/Observable';
-import { Led } from '../models/Led';
-
+import { LedBoard } from '../../models/LedBoard';
+import { Led } from '../../models/Led';
+import { ColorService } from '../colors/color.service';
 
 @Injectable()
 export class LedBoardService {
@@ -19,6 +19,7 @@ export class LedBoardService {
   private lastSelectedIndex: number;
 
   constructor(
+    private colorsService: ColorService,
     private http: HttpClient,
     @Inject("BASE_URL") private baseUrl: string) {
     this.lastSelectedIndex = -1;
@@ -33,10 +34,16 @@ export class LedBoardService {
       .map((data: any) => new LedBoard({ ledsArray: data.ledMatrix, size: data.matrixSize }))
       .do(board => { this.boardModel = board; })
   }
-
-  process() {
-    this.boardModel.leds[0].selected = true;
-    console.log("Board Model From Service: ", this.boardModel);
+  
+  newColorSelected(color) {
+    var colorComponents = this.colorsService.parseRgbStringToComponents(color);
+    this.boardModel.leds.forEach(l => {
+      if (l.selected) {
+        l.red = colorComponents.red;
+        l.green = colorComponents.green;
+        l.blue = colorComponents.blue;
+      }
+    });
   }
 
   ledClicked(led: Led, shiftDown: boolean, ctrlDown: boolean) {

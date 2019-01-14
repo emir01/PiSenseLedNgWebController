@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, HostBinding, HostListener, OnChanges, SimpleChanges } from '@angular/core';
 import { Led } from '../models/Led';
-import { LedBoardService } from '../services/led-board.service';
+import { LedBoardService } from '../services/led-board/led-board.service';
 
 @Component({
   selector: 'app-led-light',

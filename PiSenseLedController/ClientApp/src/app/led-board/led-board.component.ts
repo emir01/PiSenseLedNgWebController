@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { LedBoard } from '../models/LedBoard';
-import { LedBoardService } from '../services/led-board.service';
+import { LedBoardService } from '../services/led-board/led-board.service';
 
 @Component({
   selector: 'app-led-board',
@@ -18,6 +18,6 @@ export class LedBoardComponent implements OnInit {
   }
 
   colorChanged(newColor) {
-    console.log("Color Changed from Color picker component: ", newColor);
+    this.service.newColorSelected(newColor);
   }
 }

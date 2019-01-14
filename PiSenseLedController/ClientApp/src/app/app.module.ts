@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { LedBoardComponent } from './led-board/led-board.component';
 import { LedLightComponent } from './led-light/led-light.component';
-import { LedBoardService } from './services/led-board.service';
+import { LedBoardService } from './services/led-board/led-board.service';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { ColorService } from './services/colors/color.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ColorPickerComponent } from './color-picker/color-picker.component';
       { path: '', component: LedBoardComponent, pathMatch: 'full' },
     ])
   ],
-  providers: [LedBoardService],
+  providers: [LedBoardService, ColorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
