@@ -2,6 +2,8 @@
 
 <button (click)="process()"> Process </button>
 
+<app-color-picker (colorChanged)="colorSelected($event)"></app-color-picker>
+
 <div class="led-board-wrapper">
   <div class="led-board">
     <app-led-light *ngFor="let led of ledModel.leds;"
@@ -10,3 +12,4 @@
     <div class="clear-fix"></div>
   </div>
 </div>
+

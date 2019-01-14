@@ -1,0 +1,9 @@
+<div class="app-color-picker-wrapper">
+  <div class="app-picker-internal"
+       [(colorPicker)]="clr"
+       [cpSaveClickOutside]="false"
+       (colorPickerSelect)="colorChange($event)"
+       [style.background]="clr"
+       [cpOutputFormat]="'rgba'"
+       [cpOKButton]="true"></div>
+</div>
