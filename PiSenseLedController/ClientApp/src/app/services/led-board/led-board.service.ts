@@ -9,6 +9,7 @@ import 'rxjs/add/observable/of';
 import { Observable } from 'rxjs/Observable';
 import { LedBoard } from '../../models/LedBoard';
 import { Led } from '../../models/Led';
+
 import { ColorService } from '../colors/color.service';
 
 @Injectable()
@@ -34,16 +35,26 @@ export class LedBoardService {
       .map((data: any) => new LedBoard({ ledsArray: data.ledMatrix, size: data.matrixSize }))
       .do(board => { this.boardModel = board; })
   }
-  
+
   newColorSelected(color) {
-    var colorComponents = this.colorsService.parseRgbStringToComponents(color);
+    let colorComponents = this.colorsService.parseRgbStringToComponents(color);
+
+    let changed = false;
     this.boardModel.leds.forEach(l => {
       if (l.selected) {
+        changed = true;
         l.red = colorComponents.red;
         l.green = colorComponents.green;
         l.blue = colorComponents.blue;
       }
     });
+
+    // post the board model if it was changed 
+    if (changed) {
+      console.log("Changed");
+
+      this.http.post(this.baseUrl + "api/Led/Update", this.toLedViewModel(this.boardModel)).subscribe(r => console.log(r));
+    }
   }
 
   ledClicked(led: Led, shiftDown: boolean, ctrlDown: boolean) {
@@ -69,6 +80,13 @@ export class LedBoardService {
       });
 
       this.lastSelectedIndex = led.index;
+    }
+  }
+
+  private toLedViewModel(ledModel: LedBoard) {
+    return {
+      ledMatrix: ledModel.leds.map(led => [led.red, led.green, led.blue]),
+      matrixSize: ledModel.size
     }
   }
 }

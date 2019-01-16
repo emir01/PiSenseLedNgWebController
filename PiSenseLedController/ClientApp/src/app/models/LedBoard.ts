@@ -18,5 +18,3 @@ export class LedBoard {
     }
   }
 }
-
-export interface ILedBoardConfig { }

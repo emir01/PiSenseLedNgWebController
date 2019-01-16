@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Microsoft.WindowsAzure.Storage;
+﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using PiSenseLedController.Constants;
 using PiSenseLedController.Models;
@@ -35,6 +33,11 @@ namespace PiSenseLedController.DataAccess
             var piLedResultModel = result.Result as PiLedModel;
 
             return piLedResultModel;
+        }
+
+        public void WriteLedData()
+        {
+            throw new System.NotImplementedException();
         }
 
         EntityResolver<PiLedModel> resolver = (pk, rk, ts, props, etag) =>

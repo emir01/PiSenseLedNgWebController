@@ -20,5 +20,11 @@ namespace PiSenseLedController.Controllers
         {
             return _storage.ReadLedData().ToLedViewModel();
         }
+
+        [HttpPost("[action]")]
+        public IActionResult Update([FromBody]LedViewModel model)
+        {
+            return Ok();
+        }
     }
 }
