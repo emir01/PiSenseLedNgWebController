@@ -24,9 +24,9 @@ namespace PiSenseLedController.DataAccess
 
         public PiLedModel ReadLedData()
         {
-            CloudTable table = _tableClient.GetTableReference(ModelConstants.TableName);
+            CloudTable table = _tableClient.GetTableReference(AppConstants.TableName);
 
-            TableOperation readOperation = TableOperation.Retrieve(ModelConstants.LedMatrixPartition, ModelConstants.LedMatrixKey, resolver);
+            TableOperation readOperation = TableOperation.Retrieve(AppConstants.LedMatrixPartition, AppConstants.LedMatrixKey, resolver);
 
             TableResult result = table.ExecuteAsync(readOperation).Result;
 
@@ -37,7 +37,7 @@ namespace PiSenseLedController.DataAccess
 
         public bool WriteLedData(PiLedModel modelToWrite)
         {
-            CloudTable table = _tableClient.GetTableReference(ModelConstants.TableName);
+            CloudTable table = _tableClient.GetTableReference(AppConstants.TableName);
 
             TableOperation writeOperation = TableOperation.InsertOrReplace(modelToWrite);
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PiSenseLedController.Constants;
 using PiSenseLedController.DataAccess;
 using PiSenseLedController.Helpers;
 using PiSenseLedController.Services;
@@ -29,7 +30,7 @@ namespace PiSenseLedController.Controllers
         {
             var piLedModel = model.ToPiLedModel();
             _storage.WriteLedData(piLedModel);
-            _messageService.NotifyPiOfLedUpdate("UPDATE_LED");
+            _messageService.NotifyPiOfLedUpdate(AppConstants.LedRefreshMessage);
             return Ok();
         }
     }

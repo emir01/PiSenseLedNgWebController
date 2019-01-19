@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.Devices;
 using PiSenseLedController.Models;
+using System;
 using System.Text;
 
 namespace PiSenseLedController.Services
@@ -13,14 +14,21 @@ namespace PiSenseLedController.Services
         public AzureMessagingService(AzureConfigDto config)
         {
             _config = config;
-            _client = ServiceClient.CreateFromConnectionString(config.DeviceConnectionString);
+            _client = ServiceClient.CreateFromConnectionString(config.IotConnectionString);
         }
 
         public void NotifyPiOfLedUpdate(string data)
         {
             var messageBytes = Encoding.UTF8.GetBytes(data);
             var commandMessage = new Message(messageBytes);
-            _client.SendAsync(_config.DeviceId, commandMessage).Wait();
+            try
+            {
+                _client.SendAsync(_config.DeviceId, commandMessage).Wait();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

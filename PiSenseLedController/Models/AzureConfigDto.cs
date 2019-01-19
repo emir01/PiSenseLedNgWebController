@@ -6,7 +6,7 @@
 
         public string Key { get; set; }
 
-        public string DeviceConnectionString { get; set; }
+        public string IotConnectionString { get; set; }
 
         public string DeviceId { get; set; }
     }

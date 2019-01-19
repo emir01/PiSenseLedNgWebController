@@ -36,8 +36,8 @@ namespace PiSenseLedController.Helpers
         {
             return new PiLedModel()
             {
-                PartitionKey = ModelConstants.LedMatrixPartition,
-                RowKey = ModelConstants.LedMatrixKey,
+                PartitionKey = AppConstants.LedMatrixPartition,
+                RowKey = AppConstants.LedMatrixKey,
                 Matrix = JsonConvert.SerializeObject(viewModel.LedMatrix),
                 Size = viewModel.MatrixSize
             };

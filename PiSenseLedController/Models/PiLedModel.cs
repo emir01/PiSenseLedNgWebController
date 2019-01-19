@@ -11,8 +11,8 @@ namespace PiSenseLedController.Models
 
         public PiLedModel()
         {
-            PartitionKey = ModelConstants.LedMatrixPartition;
-            RowKey = ModelConstants.LedMatrixKey;
+            PartitionKey = AppConstants.LedMatrixPartition;
+            RowKey = AppConstants.LedMatrixKey;
         }
 }
 }
