@@ -6,7 +6,6 @@ namespace PiSenseLedController.DataAccess
     {
         PiLedModel ReadLedData();
 
-        void WriteLedData();
-
+        void WriteLedData(PiLedModel modelToUpdate);
     }
 }

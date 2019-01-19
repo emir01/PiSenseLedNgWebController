@@ -26,7 +26,7 @@ namespace PiSenseLedController.DataAccess
         {
             CloudTable table = _tableClient.GetTableReference(ModelConstants.TableName);
 
-            TableOperation readOperation = TableOperation.Retrieve<PiLedModel>(ModelConstants.LedMatrixPartition, ModelConstants.LedMatrixKey, resolver);
+            TableOperation readOperation = TableOperation.Retrieve(ModelConstants.LedMatrixPartition, ModelConstants.LedMatrixKey, resolver);
 
             TableResult result = table.ExecuteAsync(readOperation).Result;
 
@@ -35,9 +35,13 @@ namespace PiSenseLedController.DataAccess
             return piLedResultModel;
         }
 
-        public void WriteLedData()
+        public void WriteLedData(PiLedModel modelToWrite)
         {
-            throw new System.NotImplementedException();
+            CloudTable table = _tableClient.GetTableReference(ModelConstants.TableName);
+
+            TableOperation writeOperation = TableOperation.InsertOrReplace(modelToWrite);
+
+            TableResult result = table.ExecuteAsync(writeOperation).Result;
         }
 
         EntityResolver<PiLedModel> resolver = (pk, rk, ts, props, etag) =>
@@ -46,13 +50,12 @@ namespace PiSenseLedController.DataAccess
             {
                 ETag = etag,
                 Timestamp = ts,
-                Matrix = props[nameof(PiLedModel.Matrix).ToLower()].StringValue,
-                Size = props[nameof(PiLedModel.Size).ToLower()].Int32Value ?? 0
+                Matrix = props[nameof(PiLedModel.Matrix)].StringValue,
+                Size = props[nameof(PiLedModel.Size)].Int32Value ?? 0
             };
 
             return piLedModel;
         };
 
     }
-
 }

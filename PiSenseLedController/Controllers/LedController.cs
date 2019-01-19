@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PiSenseLedController.DataAccess;
 using PiSenseLedController.Helpers;
 using PiSenseLedController.ViewModels;
@@ -24,6 +24,8 @@ namespace PiSenseLedController.Controllers
         [HttpPost("[action]")]
         public IActionResult Update([FromBody]LedViewModel model)
         {
+            var piLedModel = model.ToPiLedModel();
+            _storage.WriteLedData(piLedModel);
             return Ok();
         }
     }

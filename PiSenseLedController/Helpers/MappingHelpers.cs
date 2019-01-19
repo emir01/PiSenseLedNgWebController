@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PiSenseLedController.Constants;
 using PiSenseLedController.Models;
 using PiSenseLedController.ViewModels;
 using System.Collections.Generic;
@@ -28,6 +29,17 @@ namespace PiSenseLedController.Helpers
             {
                 LedMatrix = StringMatrixAsList(model.Matrix),
                 MatrixSize = model.Size
+            };
+        }
+
+        public static PiLedModel ToPiLedModel(this LedViewModel viewModel)
+        {
+            return new PiLedModel()
+            {
+                PartitionKey = ModelConstants.LedMatrixPartition,
+                RowKey = ModelConstants.LedMatrixKey,
+                Matrix = JsonConvert.SerializeObject(viewModel.LedMatrix),
+                Size = viewModel.MatrixSize
             };
         }
     }
