@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PiSenseLedController.DataAccess;
 using PiSenseLedController.Helpers;
+using PiSenseLedController.Services;
 using PiSenseLedController.ViewModels;
 
 namespace PiSenseLedController.Controllers
@@ -9,10 +10,12 @@ namespace PiSenseLedController.Controllers
     public class LedController : Controller
     {
         private IAccessLedDataStorage _storage;
+        private IAmAnAzureMessageService _messageService;
 
-        public LedController(IAccessLedDataStorage storage)
+        public LedController(IAccessLedDataStorage storage, IAmAnAzureMessageService messageService)
         {
             _storage = storage;
+            _messageService = messageService;
         }
 
         [HttpGet("[action]")]
@@ -26,6 +29,7 @@ namespace PiSenseLedController.Controllers
         {
             var piLedModel = model.ToPiLedModel();
             _storage.WriteLedData(piLedModel);
+            _messageService.NotifyPiOfLedUpdate("UPDATE_LED");
             return Ok();
         }
     }

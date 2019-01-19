@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PiSenseLedController.DataAccess;
 using PiSenseLedController.Models;
+using PiSenseLedController.Services;
 
 namespace PiSenseLedController
 {
@@ -26,10 +27,11 @@ namespace PiSenseLedController
 
             // Load the azure configuration
             AzureConfigDto configDto = new AzureConfigDto();
-            Configuration.Bind("AzureConfiguration",configDto);
+            Configuration.Bind("AzureConfiguration", configDto);
             services.AddSingleton(configDto);
 
             services.AddScoped<IAccessLedDataStorage, TableStorageAccess>();
+            services.AddScoped<IAmAnAzureMessageService, AzureMessagingService>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

@@ -35,13 +35,15 @@ namespace PiSenseLedController.DataAccess
             return piLedResultModel;
         }
 
-        public void WriteLedData(PiLedModel modelToWrite)
+        public bool WriteLedData(PiLedModel modelToWrite)
         {
             CloudTable table = _tableClient.GetTableReference(ModelConstants.TableName);
 
             TableOperation writeOperation = TableOperation.InsertOrReplace(modelToWrite);
 
             TableResult result = table.ExecuteAsync(writeOperation).Result;
+
+            return true;
         }
 
         EntityResolver<PiLedModel> resolver = (pk, rk, ts, props, etag) =>
