@@ -12,5 +12,13 @@
 }
 
 .led-color-picker {
-  display: inline-block;
+  display: block;
+  position: relative;
+  top: 0;
+}
+
+.led-brush-mode {
+  display: block;
+  position: relative;
+  top:0;
 }

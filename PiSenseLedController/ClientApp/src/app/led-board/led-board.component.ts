@@ -8,9 +8,13 @@ import { LedBoardService } from '../services/led-board/led-board.service';
   styleUrls: ['./led-board.component.css']
 })
 export class LedBoardComponent implements OnInit {
-   ledModel: LedBoard = new LedBoard();
+  ledModel: LedBoard = new LedBoard();
+  controls = {
+    brushMode: false,
+    autosave: true
+  };
 
-    constructor(private service: LedBoardService) {
+  constructor(private service: LedBoardService) {
     service.getBoardModel().subscribe(ledBoard => this.ledModel = ledBoard);
   }
 
