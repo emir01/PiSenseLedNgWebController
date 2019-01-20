@@ -4,9 +4,13 @@
 
 .led-board {
   padding: 10px;
-  border: 3px solid #000;
+  border: 3px solid #345623;
   display: inline-block;
   width: auto;
   background-color: #48803a;
   border-radius: 10px;
+}
+
+.led-color-picker {
+  display: inline-block;
 }

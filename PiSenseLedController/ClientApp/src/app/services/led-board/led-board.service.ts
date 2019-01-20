@@ -51,9 +51,7 @@ export class LedBoardService {
 
     // post the board model if it was changed 
     if (changed) {
-      console.log("Changed");
-
-      this.http.post(this.baseUrl + "api/Led/Update", this.toLedViewModel(this.boardModel)).subscribe(r => console.log(r));
+      this.updateLedModel();
     }
   }
 
@@ -83,10 +81,32 @@ export class LedBoardService {
     }
   }
 
+  on() {
+    this.boardModel.leds.forEach(l => {
+      l.red = 255;
+      l.green = 255;
+      l.blue = 255;
+    });
+    this.updateLedModel();
+  }
+
+  off() {
+    this.boardModel.leds.forEach(l => {
+      l.red = 0;
+      l.green = 0;
+      l.blue = 0;
+    });
+    this.updateLedModel();
+  }
+
   private toLedViewModel(ledModel: LedBoard) {
     return {
       ledMatrix: ledModel.leds.map(led => [led.red, led.green, led.blue]),
       matrixSize: ledModel.size
     }
+  }
+
+  private updateLedModel() {
+    this.http.post(this.baseUrl + "api/Led/Update", this.toLedViewModel(this.boardModel)).subscribe(r => console.log(r));
   }
 }

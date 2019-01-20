@@ -1,15 +1,75 @@
-<div class="border-bottom pb-1 mb-3 text-center">
-  <h1> Led Board </h1>
-</div>
+<div class="card">
+  <h5 class="card-header">Led Board Controls</h5>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <div>
+          <h5>Instructions</h5>
+          <ul>
+            <li>Click select an individual LED </li>
+            <li>Ctrl+Click add individual to selection </li>
+            <li>Shift+Click to add in sequence from last selected LED </li>
+            <li>Can combine Ctrl and Shift for sequences of selection</li>
+            <li>After selecting leds use the color picker on the right to change color</li>
+            <li>The color #000 (black) means the LEDs are off</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col">
+        <div>
+          <h5>Quick Actions</h5>
+          <button (click)="turnOffBoard()" class="btn btn-sm btn-danger">
+            <i class="far fa-lightbulb"></i>
+            Off
+          </button>
 
-<app-color-picker (colorChanged)="colorChanged($event)"></app-color-picker>
+          <button (click)="turnOnBoard()" class="btn btn-sm btn-success">
+            <i class="fas fa-lightbulb"></i>
+            On
+          </button>
 
-<div class="led-board-wrapper">
-  <div class="led-board">
-    <app-led-light *ngFor="let led of ledModel.leds;"
-                   [led]="led">
-    </app-led-light>
-    <div class="clearfix"></div>
+          <button (click)="random()" class="btn btn-sm btn-primary">
+            <i class="fas fa-dice"></i>
+            Random - Todo
+          </button>
+
+        </div>
+        <div class="mt-2">
+          <h5>Color Picker</h5>
+          <app-color-picker class="led-color-picker" (colorChanged)="colorChanged($event)"></app-color-picker>
+          <div class="btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+              <input type="checkbox" checked autocomplete="off"> Brush Mode
+            </label>
+          </div>
+          
+        </div>
+        <div class="mt-2">
+          <h5>Save Options</h5>
+          <button class="btn btn-sm btn-primary">
+            <i class="far fa-save"></i>
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<div class="card mt-3">
+  <h5 class="card-header">Board</h5>
+  <div class="card-body">
+    <div class="led-board-wrapper">
+      <div class="led-board">
+        <app-led-light *ngFor="let led of ledModel.leds;"
+                       [led]="led">
+        </app-led-light>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 

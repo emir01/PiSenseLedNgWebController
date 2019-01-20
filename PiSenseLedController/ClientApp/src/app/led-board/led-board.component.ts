@@ -20,4 +20,14 @@ export class LedBoardComponent implements OnInit {
   colorChanged(newColor) {
     this.service.newColorSelected(newColor);
   }
+
+  turnOnBoard() {
+    console.log("Turn Board On");
+    this.service.on();
+  }
+
+  turnOffBoard() {
+    console.log("Turn Board Off");
+    this.service.off();
+  }
 }

@@ -5,6 +5,7 @@
   height: 40px;
   border: 1px dashed #CCC;
   border-radius: 5px;
+  position:relative;
 }
 
   .app-color-picker-wrapper:hover {
@@ -17,4 +18,13 @@
   width: 100%;
   height: 100%;
   border-radius:5px;
+  z-index:2;
+}
+
+.app-color-picker-icon{
+  position:absolute;
+  pointer-events:none;
+  top:10px;
+  left:10px;
+  z-index:3;
 }
