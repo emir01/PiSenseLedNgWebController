@@ -1,8 +1,12 @@
+// external modules and components
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+// app modules and components
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { LedBoardComponent } from './led-board/led-board.component';
@@ -25,6 +29,7 @@ import { ColorService } from './services/colors/color.service';
     HttpClientModule,
     FormsModule,
     ColorPickerModule,
+    NgbModule,
     RouterModule.forRoot([
       { path: '', component: LedBoardComponent, pathMatch: 'full' },
     ])
