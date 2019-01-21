@@ -26,13 +26,15 @@ export class LedBoardComponent implements OnInit {
   }
 
   turnOnBoard() {
-    console.log("Turn Board On");
     this.service.on();
   }
 
   turnOffBoard() {
-    console.log("Turn Board Off");
     this.service.off();
+  }
+
+  random() {
+    this.service.randomizeLeds();
   }
 
   handleBrushModeClick(data) {

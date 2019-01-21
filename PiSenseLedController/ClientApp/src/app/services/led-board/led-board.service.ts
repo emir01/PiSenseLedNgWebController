@@ -67,9 +67,19 @@ export class LedBoardService {
     }
   }
 
+  randomizeLeds() {
+    this.boardModel.leds.forEach(l => {
+      let randomColor = this.colorsService.getRandomColorComponent();
+      l.red = randomColor.red;
+      l.green = randomColor.green;
+      l.blue = randomColor.blue;
+    });
+
+    this.updateLedModel();
+  }
+
   ledClicked(led: Led, shiftDown: boolean, ctrlDown: boolean) {
     if (this.ledControls.brushMode && this.lastColorSelected) {
-      // do not select if in brush mode - just paint the led :)
       led.red = this.lastColorSelected.red;
       led.green = this.lastColorSelected.green;
       led.blue = this.lastColorSelected.blue;
@@ -118,6 +128,7 @@ export class LedBoardService {
       l.green = colorComponent.green;
       l.blue = colorComponent.blue;
     });
+
     this.updateLedModel();
   }
 

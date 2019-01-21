@@ -16,6 +16,16 @@ export class ColorService {
 
     return colorComponents;
   }
+
+  getRandomColorComponent(): IColorComponent {
+    let colorComponent = {
+      red: Math.floor(Math.random() * 255),
+      green: Math.floor(Math.random() * 255),
+      blue: Math.floor(Math.random() * 255)
+    };
+
+    return colorComponent;
+  }
 }
 
 export interface IColorComponent {
