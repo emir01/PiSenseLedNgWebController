@@ -15,11 +15,13 @@ export class ColorPickerComponent implements OnInit {
   colorChange($event) {
     this.colorChanged.emit($event);
   }
-  
+
   constructor() {
-    this.clr = "#FFF";
+    this.clr = "rgb(255,255,255)";
   }
 
   ngOnInit() {
+    console.log(this.clr);
+    this.colorChanged.emit(this.clr);
   }
 }

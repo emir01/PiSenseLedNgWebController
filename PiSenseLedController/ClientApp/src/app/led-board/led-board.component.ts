@@ -21,6 +21,7 @@ export class LedBoardComponent implements OnInit {
   }
 
   colorChanged(newColor) {
+    console.log("color changed: ", newColor);
     this.service.newColorSelected(newColor);
   }
 

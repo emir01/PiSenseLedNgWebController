@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { LedBoard } from '../../models/LedBoard';
 import { Led } from '../../models/Led';
 
-import { ColorService } from '../colors/color.service';
+import { ColorService, IColorComponent } from '../colors/color.service';
 
 @Injectable()
 export class LedBoardService {
@@ -23,6 +23,8 @@ export class LedBoardService {
     brushMode: false,
     autosave: true
   };
+
+  private lastColorSelected: IColorComponent;
 
   constructor(
     private colorsService: ColorService,
@@ -43,8 +45,14 @@ export class LedBoardService {
 
   newColorSelected(color) {
     let colorComponents = this.colorsService.parseRgbStringToComponents(color);
+    this.lastColorSelected = colorComponents;
 
     let changed = false;
+
+    if (!this.boardModel) {
+      return;
+    }
+
     this.boardModel.leds.forEach(l => {
       if (l.selected) {
         changed = true;
@@ -54,15 +62,20 @@ export class LedBoardService {
       }
     });
 
-    // post the board model if it was changed 
     if (changed) {
       this.updateLedModel();
     }
   }
 
   ledClicked(led: Led, shiftDown: boolean, ctrlDown: boolean) {
-    if (this.ledControls.brushMode) {
-      // do not select if in brush mode
+    if (this.ledControls.brushMode && this.lastColorSelected) {
+      // do not select if in brush mode - just paint the led :)
+      led.red = this.lastColorSelected.red;
+      led.green = this.lastColorSelected.green;
+      led.blue = this.lastColorSelected.blue;
+
+      this.updateLedModel();
+
       return false;
     }
 
@@ -92,25 +105,23 @@ export class LedBoardService {
   }
 
   on() {
-    this.boardModel.leds.forEach(l => {
-      l.red = 255;
-      l.green = 255;
-      l.blue = 255;
-    });
-    this.updateLedModel();
+    this.setAllLedsToColorComponent({ red: 255, green: 255, blue: 255 });
   }
 
   off() {
+    this.setAllLedsToColorComponent({ red: 0, green: 0, blue: 0 });
+  }
+
+  setAllLedsToColorComponent(colorComponent: IColorComponent) {
     this.boardModel.leds.forEach(l => {
-      l.red = 0;
-      l.green = 0;
-      l.blue = 0;
+      l.red = colorComponent.red;
+      l.green = colorComponent.green;
+      l.blue = colorComponent.blue;
     });
     this.updateLedModel();
   }
 
   clearSelection() {
-    console.log("Clear Selection called");
     this.boardModel.leds.forEach(l => l.selected = false);
   }
 

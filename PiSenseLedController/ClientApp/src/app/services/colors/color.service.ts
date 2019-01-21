@@ -5,7 +5,7 @@ export class ColorService {
 
   constructor() { }
 
-  parseRgbStringToComponents(rgbString: string): { red: number, green: number, blue: number } {
+  parseRgbStringToComponents(rgbString: string): IColorComponent {
     let colorComponents = { red: 255, green: 255, blue: 255 };
     let commaSeparatedValues = rgbString.substring(4, rgbString.length - 1);
     let individualValues = commaSeparatedValues.split(',');
@@ -16,4 +16,10 @@ export class ColorService {
 
     return colorComponents;
   }
+}
+
+export interface IColorComponent {
+  red: number,
+  green: number,
+  blue: number
 }
