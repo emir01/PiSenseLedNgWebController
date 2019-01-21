@@ -9,13 +9,12 @@ import { LedBoardService } from '../services/led-board/led-board.service';
 })
 export class LedBoardComponent implements OnInit {
   ledModel: LedBoard = new LedBoard();
-  controls = {
-    brushMode: false,
-    autosave: true
-  };
+
+  controls = {};
 
   constructor(private service: LedBoardService) {
     service.getBoardModel().subscribe(ledBoard => this.ledModel = ledBoard);
+    this.controls = service.ledControls;
   }
 
   ngOnInit() {
@@ -33,5 +32,11 @@ export class LedBoardComponent implements OnInit {
   turnOffBoard() {
     console.log("Turn Board Off");
     this.service.off();
+  }
+
+  handleBrushModeClick(data) {
+    if (data) {
+      this.service.clearSelection();
+    }
   }
 }

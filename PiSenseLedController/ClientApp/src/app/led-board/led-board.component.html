@@ -38,10 +38,10 @@
           <h5>Color Picker</h5>
           <div>
             <app-color-picker class="led-color-picker float-left" (colorChanged)="colorChanged($event)"></app-color-picker>
-            <div class="btn-group btn-group-toggle ml-2 mt-1 led-brush-mode float-left">
+            <div  class="btn-group btn-group-toggle ml-2 mt-1 led-brush-mode float-left">
               <label class="btn-primary btn-sm" ngbButtonLabel>
                 <i class="fas" [ngClass]="{'fa-brush':controls.brushMode }"></i>
-                <input type="checkbox" ngbButton [(ngModel)]="controls.brushMode"> Brush Mode <span *ngIf="controls.brushMode">: ON</span>
+                <input (ngModelChange)="handleBrushModeClick($event)" type="checkbox" ngbButton [(ngModel)]="controls.brushMode"> Brush Mode <span *ngIf="controls.brushMode">: ON</span>
               </label>
             </div>
             <div class="clearfix"></div>
@@ -50,9 +50,9 @@
         <div class="mt-2">
           <h5>Save Options</h5>
           <div class="btn-group btn-group-toggle ">
-            <label [ngClass]="{'btn-primary':controls.autosave, 'btn-secondary':!controls.autosave}" class="btn-primary btn-sm" ngbButtonLabel>
+            <label  [ngClass]="{'btn-primary':controls.autosave, 'btn-secondary':!controls.autosave}" class="btn-primary btn-sm" ngbButtonLabel>
               <i *ngIf="controls.autosave" class="far fa-save"></i>
-              <input type="checkbox" ngbButton [(ngModel)]="controls.autosave"> Auto Save
+              <input type="checkbox" ngbButton  [(ngModel)]="controls.autosave"> Auto Save
               <span *ngIf="controls.autosave">: ON</span>
               <span *ngIf="!controls.autosave">: OFF</span>
             </label>

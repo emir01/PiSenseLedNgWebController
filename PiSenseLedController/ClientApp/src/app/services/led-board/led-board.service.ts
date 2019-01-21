@@ -19,6 +19,11 @@ export class LedBoardService {
 
   private lastSelectedIndex: number;
 
+  ledControls = {
+    brushMode: false,
+    autosave: true
+  };
+
   constructor(
     private colorsService: ColorService,
     private http: HttpClient,
@@ -56,6 +61,11 @@ export class LedBoardService {
   }
 
   ledClicked(led: Led, shiftDown: boolean, ctrlDown: boolean) {
+    if (this.ledControls.brushMode) {
+      // do not select if in brush mode
+      return false;
+    }
+
     if (!shiftDown && !ctrlDown) {
       this.boardModel.leds.forEach(l => l.selected = false);
       led.selected = !led.selected;
@@ -97,6 +107,11 @@ export class LedBoardService {
       l.blue = 0;
     });
     this.updateLedModel();
+  }
+
+  clearSelection() {
+    console.log("Clear Selection called");
+    this.boardModel.leds.forEach(l => l.selected = false);
   }
 
   private toLedViewModel(ledModel: LedBoard) {
