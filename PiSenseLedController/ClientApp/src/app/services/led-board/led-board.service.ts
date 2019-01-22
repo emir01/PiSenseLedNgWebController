@@ -12,6 +12,8 @@ import { Led } from '../../models/Led';
 
 import { ColorService, IColorComponent } from '../colors/color.service';
 
+import * as _ from "lodash";
+
 export interface IAmLedBoardControls {
   brushMode: boolean,
   autosave: boolean
@@ -21,6 +23,9 @@ export interface IAmLedBoardControls {
 export class LedBoardService {
   // todo: make an observable? - explore what type best
   boardModel: LedBoard;
+
+  // use while auto save off
+  boardModelOffline: LedBoard;
 
   private lastSelectedIndex: number;
 
@@ -139,6 +144,17 @@ export class LedBoardService {
 
   clearSelection() {
     this.boardModel.leds.forEach(l => l.selected = false);
+  }
+
+  autoSave(autoSaveOn) {
+    console.log("autosave service");
+    if (!autoSaveOn) {
+      console.log("Auto save is off: making copy of board");
+      this.boardModelOffline = _.cloneDeep(this.boardModel);
+    }
+    else {
+      this.boardModelOffline = null;
+    }
   }
 
   private toLedViewModel(ledModel: LedBoard) {

@@ -12,7 +12,7 @@ export class LedBoardComponent implements OnInit {
 
   controls: IAmLedBoardControls = {
     autosave: false,
-    brushMode:false
+    brushMode: false
   };
 
   constructor(private service: LedBoardService) {
@@ -45,5 +45,9 @@ export class LedBoardComponent implements OnInit {
     if (data) {
       this.service.clearSelection();
     }
+  }
+
+  handleAutoSaveModeClick(data) {
+    this.service.autoSave(data);
   }
 }

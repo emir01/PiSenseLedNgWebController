@@ -12,6 +12,8 @@
             <li>Can combine Ctrl and Shift for sequences of selection</li>
             <li>After selecting leds use the color picker on the right to change color</li>
             <li>The color #000 (black) means the LEDs are off</li>
+            <li>Brush mode allows you to paint leds by clicking, after selecting a color</li>
+            <li>You can turn off auto save and paint an image and save it so it shows at once!</li>
           </ul>
         </div>
       </div>
@@ -52,7 +54,7 @@
           <div class="btn-group btn-group-toggle ">
             <label  [ngClass]="{'btn-primary':controls.autosave, 'btn-secondary':!controls.autosave}" class="btn-primary btn-sm" ngbButtonLabel>
               <i *ngIf="controls.autosave" class="far fa-save"></i>
-              <input type="checkbox" ngbButton  [(ngModel)]="controls.autosave"> Auto Save
+              <input type="checkbox" ngbButton (ngModelChange)="handleAutoSaveModeClick($event)"  [(ngModel)]="controls.autosave"> Auto Save
               <span *ngIf="controls.autosave">: ON</span>
               <span *ngIf="!controls.autosave">: OFF</span>
             </label>
