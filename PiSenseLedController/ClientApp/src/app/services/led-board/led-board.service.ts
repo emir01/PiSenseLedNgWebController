@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/do'
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 import 'rxjs/add/observable/of';
 
@@ -15,8 +15,8 @@ import { ColorService, IColorComponent } from '../colors/color.service';
 import * as _ from "lodash";
 
 export interface IAmLedBoardControls {
-  brushMode: boolean,
-  autosave: boolean
+  brushMode: boolean;
+  autosave: boolean;
 }
 
 @Injectable()
@@ -50,11 +50,11 @@ export class LedBoardService {
 
     return this.http.get(this.baseUrl + "api/Led/Model")
       .map((data: any) => new LedBoard({ ledsArray: data.ledMatrix, size: data.matrixSize }))
-      .do(board => { this.boardModel = board; })
+      .do(board => { this.boardModel = board; });
   }
 
   newColorSelected(color) {
-    let colorComponents = this.colorsService.parseRgbStringToComponents(color);
+    const colorComponents = this.colorsService.parseRgbStringToComponents(color);
     this.lastColorSelected = colorComponents;
 
     let changed = false;
@@ -79,7 +79,7 @@ export class LedBoardService {
 
   randomizeLeds() {
     this.boardModel.leds.forEach(l => {
-      let randomColor = this.colorsService.getRandomColorComponent();
+      const randomColor = this.colorsService.getRandomColorComponent();
       l.red = randomColor.red;
       l.green = randomColor.green;
       l.blue = randomColor.blue;
@@ -111,8 +111,8 @@ export class LedBoardService {
     }
 
     if (shiftDown && this.lastSelectedIndex >= 0) {
-      let smaller = Math.min(this.lastSelectedIndex, led.index);
-      let greater = Math.max(this.lastSelectedIndex, led.index);
+      const smaller = Math.min(this.lastSelectedIndex, led.index);
+      const greater = Math.max(this.lastSelectedIndex, led.index);
 
       this.boardModel.leds.forEach(l => {
         if (l.index >= smaller && l.index <= greater) {
@@ -147,13 +147,19 @@ export class LedBoardService {
   }
 
   autoSave(autoSaveOn) {
-    console.log("autosave service");
     if (!autoSaveOn) {
       console.log("Auto save is off: making copy of board");
       this.boardModelOffline = _.cloneDeep(this.boardModel);
-    }
-    else {
+    } else {
       this.boardModelOffline = null;
+    }
+  }
+
+  activeBoard() {
+    if (this.ledControls.autosave) {
+      return this.boardModel;
+    } else {
+      return this.boardModelOffline;
     }
   }
 
@@ -161,10 +167,14 @@ export class LedBoardService {
     return {
       ledMatrix: ledModel.leds.map(led => [led.red, led.green, led.blue]),
       matrixSize: ledModel.size
-    }
+    };
   }
 
-  private updateLedModel() {
-    this.http.post(this.baseUrl + "api/Led/Update", this.toLedViewModel(this.boardModel)).subscribe(r => console.log(r));
+  private updateLedModel(overideAutoSaveOption?) {
+    overideAutoSaveOption = overideAutoSaveOption || false;
+    // save led model only if autosave or overide option set
+    if (this.ledControls.autosave || overideAutoSaveOption) {
+      this.http.post(this.baseUrl + "api/Led/Update", this.toLedViewModel(this.boardModel)).subscribe(r => console.log(r));
+    }
   }
 }
