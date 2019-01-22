@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { LedBoard } from '../models/LedBoard';
-import { LedBoardService } from '../services/led-board/led-board.service';
+import { LedBoardService, IAmLedBoardControls } from '../services/led-board/led-board.service';
 
 @Component({
   selector: 'app-led-board',
@@ -10,10 +10,14 @@ import { LedBoardService } from '../services/led-board/led-board.service';
 export class LedBoardComponent implements OnInit {
   ledModel: LedBoard = new LedBoard();
 
-  controls = {};
+  controls: IAmLedBoardControls = {
+    autosave: false,
+    brushMode:false
+  };
 
   constructor(private service: LedBoardService) {
     service.getBoardModel().subscribe(ledBoard => this.ledModel = ledBoard);
+
     this.controls = service.ledControls;
   }
 

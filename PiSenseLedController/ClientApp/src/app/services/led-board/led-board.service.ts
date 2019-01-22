@@ -12,6 +12,11 @@ import { Led } from '../../models/Led';
 
 import { ColorService, IColorComponent } from '../colors/color.service';
 
+export interface IAmLedBoardControls {
+  brushMode: boolean,
+  autosave: boolean
+}
+
 @Injectable()
 export class LedBoardService {
   // todo: make an observable? - explore what type best
@@ -19,7 +24,7 @@ export class LedBoardService {
 
   private lastSelectedIndex: number;
 
-  ledControls = {
+  ledControls: IAmLedBoardControls = {
     brushMode: false,
     autosave: true
   };
