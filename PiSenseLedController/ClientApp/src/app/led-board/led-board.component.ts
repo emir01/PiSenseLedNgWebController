@@ -50,4 +50,8 @@ export class LedBoardComponent implements OnInit {
   handleAutoSaveModeClick(data) {
     this.service.autoSave(data);
   }
+
+  saveBoard(){
+    this.service.saveBoard();
+  }
 }

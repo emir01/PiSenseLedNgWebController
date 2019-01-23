@@ -6,7 +6,7 @@
         <div>
           <h5>Instructions</h5>
           <ul>
-            <li>Click select an individual LED </li>
+            <li>Click select an individual LED</li>
             <li>Ctrl+Click add individual to selection </li>
             <li>Shift+Click to add in sequence from last selected LED </li>
             <li>Can combine Ctrl and Shift for sequences of selection</li>
@@ -19,7 +19,8 @@
       </div>
       <div class="col">
         <div>
-          <h5>Quick Actions</h5>
+          <h5>Quick Actions to render</h5>
+
           <button (click)="turnOffBoard()" class="btn btn-sm btn-danger m-1">
             <i class="far fa-lightbulb"></i>
             Off
@@ -59,7 +60,7 @@
               <span *ngIf="!controls.autosave">: OFF</span>
             </label>
           </div>
-          <button *ngIf="!controls.autosave" class="btn btn-primary btn-sm ml-2">
+          <button *ngIf="!controls.autosave" class="btn btn-primary btn-sm ml-2" (click)="saveBoard()">
             <i class="far fa-save"></i>
             Save
           </button>

@@ -25,7 +25,7 @@ export class LedBoardService {
   boardModel: LedBoard;
 
   // use while auto save off
-  boardModelOffline: LedBoard;
+  boardModelBackup: LedBoard;
 
   private lastSelectedIndex: number;
 
@@ -148,19 +148,18 @@ export class LedBoardService {
 
   autoSave(autoSaveOn) {
     if (!autoSaveOn) {
-      console.log("Auto save is off: making copy of board");
-      this.boardModelOffline = _.cloneDeep(this.boardModel);
+      this.boardModelBackup = _.cloneDeep(this.boardModel);
     } else {
-      this.boardModelOffline = null;
+      _.assign(this.boardModel, this.boardModelBackup);
+      this.boardModelBackup = null;
     }
   }
 
-  activeBoard() {
-    if (this.ledControls.autosave) {
-      return this.boardModel;
-    } else {
-      return this.boardModelOffline;
-    }
+  saveBoard() {
+    this.updateLedModel(true);
+
+    // re-backup
+    this.boardModelBackup = _.cloneDeep(this.boardModel);
   }
 
   private toLedViewModel(ledModel: LedBoard) {
